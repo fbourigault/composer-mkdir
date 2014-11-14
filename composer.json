@@ -1,0 +1,21 @@
+{
+    "name": "fbourigault/composer-mkdir",
+    "description": "Composer script for easy directories creation.",
+    "license": "MIT",
+    "homepage": "https://github.com/fbourigault/composer-mkdir",
+    "authors": [
+        {
+            "name": "Fabien Bourigault",
+            "email": "bourigaultfabien@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "composer/composer": "1.0.*@dev",
+        "phpunit/phpunit": "~4.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Fbourigault\\ComposerMkdir\\": "src/"
+        }
+    }
+}
