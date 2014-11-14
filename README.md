@@ -20,10 +20,10 @@ Usage
     },
     "scripts": {
         "post-install-cmd": [
-            "Fbourigault\\ComposerMkdir\\ScriptHandler::mkdirs
+            "Fbourigault\\ComposerMkdir\\ScriptHandler::mkdirs"
         ],
         "post-update-cmd": [
-            "Fbourigault\\ComposerMkdir\\ScriptHandler::mkdirs
+            "Fbourigault\\ComposerMkdir\\ScriptHandler::mkdirs"
         ]
     },
     "extra": {
