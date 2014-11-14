@@ -142,6 +142,18 @@ class ScriptHandlerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->isDir("var"));
     }
 
+    public function testMkdirsExists()
+    {
+        touch($this->tmp . '/var');
+        $event = $this->getEventMock(array(
+            "fbourigault-composer-mkdir" => array(
+                "var"
+            )
+        ));
+        ScriptHandler::mkdirs($event);
+        $this->assertFalse($this->isDir("var"));
+    }
+
     private function getEventMock(array $extra)
     {
         $package = $this->getMock('Composer\Package\RootPackageInterface');
