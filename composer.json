@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Fbourigault\\ComposerMkdir\\": "src/"
+            "Fbourigault\\ComposerMkdir\\": ""
         }
     },
     "extra": {
