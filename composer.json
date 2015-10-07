@@ -15,12 +15,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Fbourigault\\ComposerMkdir\\": "src/"
+            "Fbourigault\\ComposerMkdir\\": ""
         }
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0.x-dev"
+            "dev-master": "2.0.x-dev"
         }
     }
 }

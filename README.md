@@ -16,7 +16,7 @@ Usage
 ```json
 {
     "require": {
-        "fbourigault/composer-mkdir": "~1.0"
+        "fbourigault/composer-mkdir": "^2.0"
     },
     "scripts": {
         "post-install-cmd": [
@@ -28,41 +28,11 @@ Usage
     },
     "extra": {
         "fbourigault-composer-mkdir": [
-            "var/log",
-            {
-                "path": "tmp",
-                "mode": "2770"
-            }
-        ]
-    }
-}
-```
-
-Parent directories are created if required.
-
-You can provide directories as string :
-```json
-{
-    "extra": {
-        "fbourigault-composer-mkdir": [
+            "var/cache",
             "var/log"
         ]
     }
 }
 ```
 
-or as object :
-```json
-{
-    "extra": {
-        "fbourigault-composer-mkdir": [
-            {
-                "path": "tmp",
-                "mode": "2770"
-            }
-        ]
-    }
-}
-```
-
-The object form allows you to specify the mode.
+Parent directories are created if required.
