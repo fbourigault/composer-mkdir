@@ -18,7 +18,7 @@ class ScriptHandlerTest extends \PHPUnit_Framework_TestCase
         $this->cwd = getcwd();
         $this->tmp = sys_get_temp_dir() . '/' . uniqid('phpunit-', true);
         $this->umask = umask(0);
-        mkdir($this->tmp, 0777, true);
+        mkdir($this->tmp);
         chdir($this->tmp);
     }
 
@@ -52,6 +52,19 @@ class ScriptHandlerTest extends \PHPUnit_Framework_TestCase
         ScriptHandler::mkdirs($event);
     }
 
+    public function testMkdirsLegacy()
+    {
+        $message = 'Since 2.0, mode is no longer supported. See UPGRADE-2.0.md for further details.';
+        $this->setExpectedException('InvalidArgumentException', $message);
+        $event = $this->getEventMock(array(
+            "fbourigault-composer-mkdir" => array(
+                "path" => "var/log",
+                "mode" => 0770
+            )
+        ));
+        ScriptHandler::mkdirs($event);
+    }
+
     public function testMkdirsString()
     {
         $event = $this->getEventMock(array(
@@ -61,68 +74,18 @@ class ScriptHandlerTest extends \PHPUnit_Framework_TestCase
         ));
         ScriptHandler::mkdirs($event);
         $this->assertTrue($this->isDir("var"));
-        $this->assertEquals(0777, $this->getMode("var"));
-    }
-
-    public function testMkdirsArrayMissingPath()
-    {
-        $message = 'Directories provided as array must have the path key.';
-        $this->setExpectedException('InvalidArgumentException', $message);
-        $event = $this->getEventMock(array(
-            "fbourigault-composer-mkdir" => array(
-                array(
-                    "mode" => 2770
-                )
-            )
-        ));
-        ScriptHandler::mkdirs($event);
-    }
-
-    public function testMkdirsArrayMissingMode()
-    {
-        $message = 'Directories provided as array must have the mode key.';
-        $this->setExpectedException('InvalidArgumentException', $message);
-        $event = $this->getEventMock(array(
-            "fbourigault-composer-mkdir" => array(
-                array(
-                    "path" => "tmp"
-                )
-            )
-        ));
-        ScriptHandler::mkdirs($event);
-    }
-
-    public function testMkdirsArray()
-    {
-        $event = $this->getEventMock(array(
-            "fbourigault-composer-mkdir" => array(
-                array(
-                    "path" => "tmp",
-                    "mode" => 0770
-                )
-            )
-        ));
-        ScriptHandler::mkdirs($event);
-
-        $this->assertTrue($this->isDir("tmp"));
-        $this->assertEquals(0770, $this->getMode("tmp"));
     }
 
     public function testMkdirsParents()
     {
         $event = $this->getEventMock(array(
             "fbourigault-composer-mkdir" => array(
-                array(
-                    "path" => "var/log",
-                    "mode" => 0770
-                )
+                "var/log",
             )
         ));
         ScriptHandler::mkdirs($event);
 
         $this->assertTrue($this->isDir("var/log"));
-        $this->assertEquals(0770, $this->getMode("var"));
-        $this->assertEquals(0770, $this->getMode("var/log"));
     }
 
     public function testMkdirsMultiple()
@@ -130,10 +93,7 @@ class ScriptHandlerTest extends \PHPUnit_Framework_TestCase
         $event = $this->getEventMock(array(
             "fbourigault-composer-mkdir" => array(
                 "log",
-                array(
-                    "path" => "var/log",
-                    "mode" => 0770
-                )
+                "var/log",
             )
         ));
         ScriptHandler::mkdirs($event);
@@ -181,10 +141,5 @@ class ScriptHandlerTest extends \PHPUnit_Framework_TestCase
     private function isDir($dir)
     {
         return is_dir($this->tmp . '/' . $dir);
-    }
-
-    private function getMode($dir)
-    {
-        return fileperms($this->tmp . '/' . $dir) & 0777;
     }
 }
