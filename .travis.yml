@@ -10,7 +10,9 @@ php:
     - 7
     - hhvm
 
-before_script: composer update
+before_script:
+    - composer self-update
+    - composer update
 
 script: phpunit --coverage-text --coverage-clover=coverage.clover
 
