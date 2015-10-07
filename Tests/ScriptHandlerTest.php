@@ -34,6 +34,9 @@ class ScriptHandlerTest extends \PHPUnit_Framework_TestCase
         unset($this->cwd);
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
     public function testMkdirsMissingConfig()
     {
         $message = 'The mkdir handler needs to be configured through the extra.fbourigault-composer-mkdir setting.';
@@ -42,6 +45,9 @@ class ScriptHandlerTest extends \PHPUnit_Framework_TestCase
         ScriptHandler::mkdirs($event);
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
     public function testMkdirsConfigNotArray()
     {
         $message = 'The extra.fbourigault-composer-mkdir setting must be an array.';
@@ -52,6 +58,9 @@ class ScriptHandlerTest extends \PHPUnit_Framework_TestCase
         ScriptHandler::mkdirs($event);
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
     public function testMkdirsLegacy()
     {
         $message = 'Since 2.0, mode is no longer supported. See UPGRADE-2.0.md for further details.';
@@ -65,6 +74,9 @@ class ScriptHandlerTest extends \PHPUnit_Framework_TestCase
         ScriptHandler::mkdirs($event);
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
     public function testMkdirsString()
     {
         $event = $this->getEventMock(array(
@@ -76,6 +88,9 @@ class ScriptHandlerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->isDir("var"));
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
     public function testMkdirsParents()
     {
         $event = $this->getEventMock(array(
@@ -88,6 +103,9 @@ class ScriptHandlerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->isDir("var/log"));
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
     public function testMkdirsMultiple()
     {
         $event = $this->getEventMock(array(
@@ -102,6 +120,9 @@ class ScriptHandlerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->isDir("var"));
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
     public function testMkdirsExists()
     {
         touch($this->tmp . '/var');
