@@ -35,7 +35,7 @@ class ScriptHandler
             list ($path, $mode) = self::parsePathAndMode($dir);
         }
 
-        if(file_exists($path)) {
+        if (file_exists($path)) {
             return;
         }
         mkdir($path, $mode, true);
